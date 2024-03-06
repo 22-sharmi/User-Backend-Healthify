@@ -14,10 +14,11 @@ app.use(express.urlencoded({ extended: false }));
 
 // Routes
 app.get('/', (req, res) => {
-    res.json({ message: 'API is runnings.' });
+   const users = await User.find();
+    res.json(users);
 });
 
-app.post('/users', async (req, res) => {
+app.post('/', async (req, res) => {
   try {
     const { what, username, password, gender, lang, age, height, weight,city,active, name } = req.body;
     const newUser = new User({
